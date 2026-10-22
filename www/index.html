@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu App Monaca</title>
+  
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+  <style>
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .container {
+      padding: 30px 20px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .app-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .app-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .field-group {
+      margin-bottom: 20px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    .custom-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      height: 44px;
+      line-height: 44px;
+      background-color: #007aff;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    .link-box {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .link-box a {
+      color: #007aff;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <ons-navigator id="appNavigator" page="login.html"></ons-navigator>
+
+
+  <template id="login.html">
+    <ons-page id="loginPage">
+      <div class="container">
+        <h1 class="app-title">Entrar</h1>
+        <p class="app-subtitle">Acesse sua conta para continuar</p>
+
+        <form onsubmit="return false;">
+          <div class="field-group">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" class="custom-input">
+          </div>
+
+          <div class="field-group">
+            <label for="login-pass">Senha</label>
+            <input type="password" id="login-pass" class="custom-input">
+          </div>
+
+          <ons-button class="btn-submit" onclick="irParaHome()">Entrar</ons-button>
+        </form>
+
+        <div class="link-box">
+          Não tem conta? <a onclick="irParaCadastro()">Cadastre-se</a>
+        </div>
+      </div>
+    </ons-page>
+  </template>
+
+
+  <template id="cadastro.html">
+    <ons-page id="cadastroPage">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Voltar</ons-back-button></div>
+        <div class="center">Criar Conta</div>
+      </ons-toolbar>
+
+      <div class="container">
+        <h1 class="app-title">Cadastro</h1>
+        <p class="app-subtitle">Preencha os dados abaixo</p>
+
+        <form onsubmit="return false;">
+          <div class="field-group">
+            <label for="cad-nome">Nome Completo</label>
+            <input type="text" id="cad-nome" class="custom-input">
+          </div>
+
+          <div class="field-group">
+            <label for="cad-email">E-mail</label>
+            <input type="email" id="cad-email" class="custom-input">
+          </div>
+
+          <div class="field-group">
+            <label for="cad-pass">Senha</label>
+            <input type="password" id="cad-pass" class="custom-input">
+          </div>
+
+          <ons-button class="btn-submit" onclick="irParaHome()">Criar Conta</ons-button>
+        </form>
+
+        <div class="link-box">
+          Já tem uma conta? <a onclick="voltarParaLogin()">Fazer Login</a>
+        </div>
+      </div>
+    </ons-page>
+  </template>
+
+  <template id="home.html">
+    <ons-page id="homePage">
+      <ons-toolbar>
+        <div class="center">Início</div>
+        <div class="right">
+          <ons-toolbar-button onclick="sair()">Sair</ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+
+      <div class="container">
+        <h1 class="app-title">E ai seja bem vindo ao site </h1>
+        <p class="app-subtitle">Você está na Tela Inicial.</p>
+
+        <ons-button class="btn-submit" style="background-color: #e53e3e; margin-top:20px;" onclick="sair()">
+          Sair da Conta
+        </ons-button>
+      </div>
+    </ons-page>
+  </template>
+
+
+  <script>
+   
+    function irParaCadastro() {
+      document.getElementById('appNavigator').pushPage('cadastro.html');
+    }
+
+ 
+    function voltarParaLogin() {
+      document.getElementById('appNavigator').popPage();
+    }
+
+    function irParaHome() {
+      document.getElementById('appNavigator').resetToPage('home.html');
+    }
+
+    function sair() {
+      document.getElementById('appNavigator').resetToPage('login.html');
+    }
+  </script>
+</body>
+</html>
